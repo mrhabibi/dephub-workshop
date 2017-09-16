@@ -13,12 +13,12 @@ import java.util.List;
 @Dao
 public interface PinDao {
 
-    @Query("SELECT * FROM pin")
+    @Query("SELECT * FROM pin ORDER BY timestamp DESC")
     List<Pin> getAll();
 
     @Insert
-    void add(Pin user);
+    void add(Pin pin);
 
     @Delete
-    void delete(Pin user);
+    void delete(Pin pin);
 }

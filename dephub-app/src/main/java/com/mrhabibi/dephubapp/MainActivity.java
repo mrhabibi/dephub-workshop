@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = MapsFragment_.builder().build();
                     break;
                 case R.id.navigation_notifications:
-                    fragment = PinFragment_.builder().build();
+                    fragment = HistoryFragment_.builder().build();
                     break;
             }
             if (fragment != null) {

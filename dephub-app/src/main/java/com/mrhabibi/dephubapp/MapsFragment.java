@@ -1,14 +1,20 @@
 package com.mrhabibi.dephubapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,12 +33,15 @@ import java.util.List;
  * Created by mrhabibi on 9/14/17.
  */
 @EFragment(R.layout.fragment_maps)
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
+public class MapsFragment extends Fragment implements OnMapReadyCallback, LocationListener {
 
     @ViewById(R.id.searchview_location)
     SearchView searchViewLocation;
 
     GoogleMap gmap;
+    private LocationManager locationManager;
+    private static final long MIN_TIME = 400;
+    private static final float MIN_DISTANCE = 1000;
 
     @AfterViews
     void initView() {
@@ -48,8 +57,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 if (location != null) {
                     gmap.addMarker(new MarkerOptions().position(location));
                     gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10.0f));
+                    BaseApplication.get().database.pinDao().add(new Pin(query, location.longitude, location.latitude));
+                    searchViewLocation.clearFocus();
                 }
-                return false;
+                return true;
             }
 
             @Override
@@ -101,5 +112,30 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             return;
         }
         gmap.setMyLocationEnabled(true);
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10.0f);
+        gmap.animateCamera(cameraUpdate);
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

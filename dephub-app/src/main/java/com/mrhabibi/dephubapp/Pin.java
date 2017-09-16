@@ -10,47 +10,55 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Pin {
 
+    @ColumnInfo
     @PrimaryKey
-    private int uid;
+    private long timestamp;
 
     @ColumnInfo
-    private long name;
+    private String name;
 
     @ColumnInfo
-    private long longitude;
+    private double longitude;
 
     @ColumnInfo
-    private long latitude;
+    private double latitude;
 
-    public int getUid() {
-        return uid;
+    public Pin(String name, double longitude, double latitude) {
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
