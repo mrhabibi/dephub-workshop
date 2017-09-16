@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
 
@@ -11,5 +12,9 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
