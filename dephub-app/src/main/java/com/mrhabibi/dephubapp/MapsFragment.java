@@ -9,9 +9,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -39,9 +41,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
     SearchView searchViewLocation;
 
     GoogleMap gmap;
-    private LocationManager locationManager;
-    private static final long MIN_TIME = 400;
-    private static final float MIN_DISTANCE = 1000;
+    LocationManager locationManager;
 
     @AfterViews
     void initView() {
@@ -71,13 +71,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
     }
 
     public LatLng getLocationFromAddress(String strAddress) {
-
         Geocoder coder = new Geocoder(getContext());
         List<Address> address;
         LatLng p1 = null;
 
         try {
-            // May throw an IOException
             address = coder.getFromLocationName(strAddress, 5);
             if (address == null) {
                 return null;
@@ -93,7 +91,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
             p1 = new LatLng(location.getLatitude(), location.getLongitude());
 
         } catch (IOException ex) {
-
             ex.printStackTrace();
         }
 
@@ -112,8 +109,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
             return;
         }
         gmap.setMyLocationEnabled(true);
+
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
+        Location myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        LatLng latlng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10.0f);
+        gmap.moveCamera(cameraUpdate);
     }
 
     @Override

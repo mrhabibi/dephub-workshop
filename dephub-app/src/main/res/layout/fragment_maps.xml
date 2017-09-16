@@ -9,14 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_locate_me"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_mapmode" />
-
     <android.support.v7.widget.SearchView
         android:id="@+id/searchview_location"
         android:layout_width="match_parent"
@@ -24,6 +16,6 @@
         android:background="@android:color/white"
         android:layout_gravity="top"
         android:layout_margin="8dp"
-        android:hint="Enter a place" />
+        android:hint="Masukkan alamat" />
 
 </android.support.design.widget.CoordinatorLayout>
