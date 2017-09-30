@@ -9,7 +9,7 @@ import android.arch.persistence.room.Room;
 
 public class BaseApplication extends Application {
 
-    static BaseApplication instance;
+    private static BaseApplication instance;
 
     public static BaseApplication get() {
         return instance;

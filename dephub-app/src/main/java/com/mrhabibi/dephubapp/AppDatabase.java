@@ -6,9 +6,9 @@ import android.arch.persistence.room.RoomDatabase;
 /**
  * Created by mrhabibi on 9/14/17.
  */
-@Database(entities = {Pin.class}, version = 1)
+@Database(entities = {Place.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract PinDao pinDao();
+    public abstract PlaceDao pinDao();
 
 }

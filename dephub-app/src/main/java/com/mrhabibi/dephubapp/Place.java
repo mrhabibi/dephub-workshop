@@ -4,11 +4,13 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 /**
  * Created by mrhabibi on 9/14/17.
  */
 @Entity
-public class Pin {
+public class Place implements Serializable {
 
     @ColumnInfo
     @PrimaryKey
@@ -18,13 +20,17 @@ public class Pin {
     private String name;
 
     @ColumnInfo
+    private String description;
+
+    @ColumnInfo
     private double longitude;
 
     @ColumnInfo
     private double latitude;
 
-    public Pin(String name, double longitude, double latitude) {
-        this.name = name;
+    public Place(double longitude, double latitude) {
+        this.name = "";
+        this.description = "";
         this.longitude = longitude;
         this.latitude = latitude;
         this.timestamp = System.currentTimeMillis();
@@ -36,6 +42,14 @@ public class Pin {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getLongitude() {

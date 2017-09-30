@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment = HomeFragment_.builder().build();
+                    fragment = new HomeFragment();
                     break;
                 case R.id.navigation_dashboard:
-                    fragment = MapsFragment_.builder().build();
+                    fragment = new MapFragment();
                     break;
                 case R.id.navigation_notifications:
-                    fragment = HistoryFragment_.builder().build();
+                    fragment = new PlaceFragment();
                     break;
             }
             if (fragment != null) {
