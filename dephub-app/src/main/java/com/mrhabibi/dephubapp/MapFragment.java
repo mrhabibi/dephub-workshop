@@ -155,9 +155,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
         Location myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-        LatLng latlng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10.0f);
-        gmap.moveCamera(cameraUpdate);
+        if (myLocation != null) {
+            LatLng latlng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 10.0f);
+            gmap.moveCamera(cameraUpdate);
+        }
     }
 
     @Override
