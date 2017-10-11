@@ -3,6 +3,8 @@ package com.mrhabibi.dephubapp;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
+import com.facebook.stetho.Stetho;
+
 /**
  * Created by mrhabibi on 9/16/17.
  */
@@ -22,5 +24,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, "app-database.db").allowMainThreadQueries().build();
+        Stetho.initializeWithDefaults(this);
     }
 }
