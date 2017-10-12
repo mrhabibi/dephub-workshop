@@ -1,4 +1,4 @@
-# Workshop Teknis Jabatan fungsional Pranata Komputer
+# Workshop Teknis Jabatan Fungsional Pranata Komputer
 
 Kementerian Perhubungan tahun 2017
 
