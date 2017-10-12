@@ -8,7 +8,7 @@ Bogor, 12-13 Oktober 2017
 
 https://github.com/mrhabibi/dephub-workshop/blob/master/Presentasi.pptx
 
-## Ringkasan
+## Tentang Aplikasi
 
 Aplikasi untuk menyimpan dan mengatur lokasi-lokasi favorit kita dari peta menggunakan Google Maps API
 
