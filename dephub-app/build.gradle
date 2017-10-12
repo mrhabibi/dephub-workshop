@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'dephubkey'
             keyPassword KEY_PASSWORD
-            storeFile file('/Users/mrhabibi/dephub.jks')
+            storeFile file('dephub.jks')
             storePassword KEYSTORE_PASSWORD
         }
     }
@@ -46,7 +46,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:11.2.2'
     compile 'android.arch.persistence.room:runtime:1.0.0-alpha9'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha9"
-    debugCompile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-vector-drawable:26.+'
